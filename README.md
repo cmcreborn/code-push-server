@@ -62,6 +62,11 @@ $ ./bin/db init --dbhost localhost --dbport 3306  --dbuser root --dbpassword myp
 $ ./bin/db init --dbhost 192.168.20.15 --dbport 3306  --dbuser user02 --dbpassword mypassword666
 ```
 
+## 启动server
+```shell
+$ pm2 start process.json
+```
+
 # 以下保留原開源說明
 # CodePush Server [source](https://github.com/lisong/code-push-server) 
 
