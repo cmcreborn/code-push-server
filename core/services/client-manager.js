@@ -174,7 +174,7 @@ proto.updateCheck = function(deploymentKey, appVersion, label, packageHash, clie
     if (_.eq(packageId, 0) ) {
       return;
     }
-    return models.Packages.findById(packageId)
+    return models.Packages.findByPk(packageId)
     .then((packages) => {
       if (packages
         && _.eq(packages.deployment_id, deploymentsVersions.deployment_id)

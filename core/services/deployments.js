@@ -35,7 +35,7 @@ proto.existDeloymentName = function (appId, name) {
 
 proto.addDeloyment = function (name, appId, uid) {
   var self = this;
-  return models.Users.findById(uid)
+  return models.Users.findByPk(uid)
   .then((user) => {
     if (_.isEmpty(user)) {
       throw new AppError.AppError('can\'t find user');
@@ -116,7 +116,7 @@ proto.findPackagesAndOtherInfos = function (packageId) {
         return null;
       }),
       userInfo: models.Users.findOne({where: {id: packageInfo.released_by}}),
-      deploymentsVersions: models.DeploymentsVersions.findById(packageInfo.deployment_version_id)
+      deploymentsVersions: models.DeploymentsVersions.findByPk(packageInfo.deployment_version_id)
     });
   });
 };

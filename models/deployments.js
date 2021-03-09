@@ -28,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
   Deployments.generateLabelId = function(deploymentId) {
     var self = this;
     return sequelize.transaction(function (t) {
-      return self.findById(deploymentId, {transaction: t,lock: t.LOCK.UPDATE}).then(function (data) {
+      return self.findByPk(deploymentId, {transaction: t,lock: t.LOCK.UPDATE}).then(function (data) {
         if (_.isEmpty(data)){
           throw new AppError.AppError("does not find deployment");
         }
