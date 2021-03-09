@@ -61,6 +61,16 @@ $ ./bin/db init --dbhost localhost --dbport 3306  --dbuser root --dbpassword myp
 ```shell
 $ ./bin/db init --dbhost 192.168.20.15 --dbport 3306  --dbuser user02 --dbpassword mypassword666
 ```
+## code修改記錄(與開源 2021-02-26相比)
+- Buffer ==> 修正 new Buffer(), Buffer.from()問題 //[DEP0005]
+- 增加 pm2 start process.json 配置 cluster時 log4js 修改參數
+  ```javascript
+  pm2: true,        
+  disableClustering: true, 
+  ```
+- sequelize 4.44.3 api更换 findById -> findByPk, 后续需要再往上升级修正(因4.x版官方已不再维护, 5.x已计画停止, 需直上6.x)
+- helmet 新版同源政策修改问题 暂定contentSecurityPolicy false, 后续需要优化改进
+
 
 ## 启动server
 ```shell
