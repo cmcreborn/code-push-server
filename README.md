@@ -1,3 +1,68 @@
+# Self Testing Code Push Server
+原 [code-push-server](https://github.com/lisong/code-push-server) 做一些小测试跟更动, 欢迎讨论
+
+## Basic 環境
+### MacOS 11.2
+- node：v14.15.5
+- mySQL: 5.7.31 (注意最新版有加密修改问题,以及 sequelize支援的版本)
+- OS: MacOS 11.2.1, 11.2.2
+- code-push-cli: 2.1.6 (务必确认cli版本)
+### Ubuntu 18.04
+- node：v14.15.5
+- mySQL: 5.7.33 (注意最新版有加密修改问题,以及 sequelize支援的版本)
+
+## 注意事項
+### node_modules相关
+- 與原[code-push-server](https://github.com/lisong/code-push-server)上不同的地方(2021-02-26)：
+  - 套件 lodash  (4.17.21)
+  - 套件 log4js   6.3.0 
+  - 套件 validator （10.11.0）
+  - 套件 nodemailer 6.4.16 -> in case of Command Injection
+  - 套件 pug 3.0.1 -> in case of Remote Code Execution
+  - 套件 markdown-it 10.0.0 -> in case of Regular Expression Denial of Service
+  - 移除 istanbul 
+  - 套件 mocha  8.3.0 
+  - 套件 sequelize 4.44.3 <NOTE> 修正4.x版 sql 注入issue, 后续需要升到6.x版 或另外更换套件
+  - 套件 cos-nodejs-sdk-v5 2.9.9 
+  - 套件 aliyun-sdk 1.12.3
+  - 套件 upyun 3.4.4 
+  - 套件 qiniu 7.3.2 -> in case of Regular Expression Denial of Service 
+  - 套件 helmet 4.4.1 -> express 安全性提升
+  - 套件 yargs 16.2.0
+  - 套件 morgan 1.10.0
+- Pm2 全局安裝 ==> pm2 install pm2-intercom 
+
+### MySQL相关
+- Mysql  執行前需要用可以修改root 帳密的工具先行改好臨時密碼
+
+### config.js相关
+- 記得設定好config.js內容：
+  - db ==> mysql 帳密
+  - Local ==> 根據設定檔案路徑 先行建立好相對資料夾
+  - jwt ==> 務必修改加密token
+- 资料夹 config 底下保留原本开源专案的config档案做备存,实际运行pm2 start process.json时依据该process.json里的 env 里的 CONFIG_FILE 定义来处理
+
+### process.json相关
+- json 注解烦请依照json正常格式, 另外key统一加上 "_//_" 前缀
+- For PM2 running setting:
+  - env.NODE_ENV <注意开发环境跟生产环境设定> 程式里有依据此参数做处理
+  - env.CONFIG_FILE 吃config档案的路径设定
+  - env底下参数有新增需再说明详列
+  - 其馀参数参考pm2官方处理
+
+## Mysql db 建立SCHEMA腳本使用範例
+
+- 進入code-push-server 初始化mysql db, 创建codepush SCHEMA
+  - local Mysql (建议产线不要用local)
+```shell
+$ ./bin/db init --dbhost localhost --dbport 3306  --dbuser root --dbpassword mypassword666
+```
+  - remote Mysql (记得setup Mysql remote access auth)
+```shell
+$ ./bin/db init --dbhost 192.168.20.15 --dbport 3306  --dbuser user02 --dbpassword mypassword666
+```
+
+# 以下保留原開源說明
 # CodePush Server [source](https://github.com/lisong/code-push-server) 
 
 [![NPM](https://nodei.co/npm/code-push-server.svg?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/code-push-server/)

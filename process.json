@@ -1,0 +1,29 @@
+{
+    "apps" : [
+        {
+            "name"      : "code-push-server",
+            "max_memory_restart" : "300M",
+            "script"    : "./bin/www",
+            "_//_instances": "开启实例数量，max为cpu核数",
+            "instances"  : "max", 
+            "_//_exec_mode": " cluster集群模式，最大提升网站并发, fork 一般pm2 start default 模式",
+            "exec_mode"  : "cluster",
+            "_//_node_args": " node 相关参数",
+            "node_args" : "--trace-deprecation",
+            "env" : {
+                "_//_NODE_ENV":"production, development",
+                "NODE_ENV" : "development",
+                "PORT" : 3000,
+                "CONFIG_FILE" : "./config.js",
+                
+                "_//_Must set add config when STORAGE_TYPE is upyun":"example as below, key名称记得拿掉_//_",
+                "_//_STORAGE_TYPE" : "upyun",
+                "_//_DOWNLOAD_URL" : "",
+                "_//_UPYUN_STORAGE_DIR" : "",
+                "_//_UPYUN_SERVICE_NAME" : "",
+                "_//_UPYUN_OPERATOR_NAME" : "",
+                "_//_UPYUN_OPERATOR_PASS" : ""
+            }
+        }
+    ]
+}
