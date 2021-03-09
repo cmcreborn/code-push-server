@@ -65,7 +65,7 @@ function getEtag(buffer,callback){
 		}
 
 		sha1Buffer = Buffer.concat(
-			[new Buffer([prefix]),sha1Buffer],
+			[new Buffer.from([prefix]),sha1Buffer],
 			sha1Buffer.length + 1
 		);
 
