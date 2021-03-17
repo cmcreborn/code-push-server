@@ -3,11 +3,17 @@
 
 ## Basic 環境
 ### MacOS 11.2
+#### Server side
 - node：v14.15.5
 - mySQL: 5.7.31 (注意最新版有加密修改问题,以及 sequelize支援的版本)
 - OS: MacOS 11.2.1, 11.2.2
+#### code-push client
 - code-push-cli: 2.1.6 (务必确认cli版本)
+#### RN project
+- code push 7.0.0
+
 ### Ubuntu 18.04
+#### Server side
 - node：v14.15.5
 - mySQL: 5.7.33 (注意最新版有加密修改问题,以及 sequelize支援的版本)
 
